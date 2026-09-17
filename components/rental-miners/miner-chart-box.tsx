@@ -57,8 +57,8 @@ const MinerChartBox: React.FC<Props> = ({
   const [refreshRate, setRefreshRate] = useState(60);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
+    const fetchData = async (showSpinner: boolean) => {
+      if (showSpinner) setLoading(true);
 
       try {
         const response = await fetch(`/api/demo/rental-miners/${bucketId}/data`);
@@ -67,15 +67,14 @@ const MinerChartBox: React.FC<Props> = ({
       } catch (e) {
         setData([]);
       } finally {
-        setLoading(false);
+        if (showSpinner) setLoading(false);
       }
     };
 
-    fetchData();
+    fetchData(true);
 
-    // Set up interval for refreshing data
     const interval = setInterval(() => {
-      fetchData();
+      fetchData(false);
     }, refreshRate * 1000);
     return () => clearInterval(interval);
   }, [bucketId, refreshRate]);

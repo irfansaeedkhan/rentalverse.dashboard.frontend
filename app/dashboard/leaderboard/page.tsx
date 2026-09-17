@@ -14,7 +14,7 @@ const LeaderBoard = () => {
   const [totalPages, setTotalPages] = useState(0);
 
   const getLeaderboardDetails = useCallback(async () => {
-    setIsLoading("pending");
+    setIsLoading((prev) => (prev === "resolved" ? "resolved" : "pending"));
     try {
       const res = await getLeaderBoard(page);
       setleaderboardList(res);
@@ -22,7 +22,7 @@ const LeaderBoard = () => {
       setIsLoading("resolved");
     } catch (error) {
       setIsLoading("rejected");
-      console.log(error);
+      console.error(error);
     }
   }, [page]);
 

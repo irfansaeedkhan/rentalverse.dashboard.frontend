@@ -110,6 +110,7 @@ const MobileMenu = ({
                         ref={addToRefs}
                         href={item.link}
                         key={item.link}
+                        prefetch
                         onClick={handleClose}
                         className="menu-link-item flex w-full items-center justify-start gap-4"
                       >

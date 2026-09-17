@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useEffect, useMemo, useState, Suspense, lazy } from "react";
+import React, { useCallback, useEffect, useMemo, useState, Suspense, lazy, useRef } from "react";
 import { TransactionTable } from "@/components/dashboard";
 import { CgSpinner } from "react-icons/cg";
 
@@ -21,7 +21,6 @@ import {
   getAvailableBalance,
   GetAvailableBalanceResponse,
 } from "@/lib/auth/get-available-balance";
-import RevenueGraph from "@/components/dashboard/graph";
 
 import {
   getShowRewardListDetails,
@@ -34,19 +33,31 @@ import {
 import { CardTransactionTable } from "@/components/dashboard/card-transaction-table";
 import { CardTransactionTableMobile } from "@/components/dashboard/card-transaction-table-mobile";
 import { DEMO_PAGE_SIZE } from "@/lib/demo-api";
+import dynamic from "next/dynamic";
+
+const DashboardLazyCards = lazy(
+  () => import("../../components/dashboard/dashboard-cards"),
+);
+
+const RevenueGraph = dynamic(() => import("@/components/dashboard/graph"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-64 w-full items-center justify-center rounded-xl bg-primary-dark">
+      <CgSpinner className="size-8 animate-spin text-white" />
+    </div>
+  ),
+});
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
+  const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
+  const hasLoadedOnceRef = useRef(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [cardPage, setCardPage] = useState(1);
   const [cardTotalPages, setCardTotalPages] = useState(1);
   const [rewardListpage, setRewardListPage] = useState(1);
   const [rewardListTotalPages, setRewardListTotalPages] = useState(1);
-
-  const DashboardLazyCards = lazy(
-    () => import("../../components/dashboard/dashboard-cards"),
-  );
 
   const handleNextPage = () => {
     if (page < totalPages) {
@@ -164,7 +175,9 @@ const Dashboard = () => {
   }, []);
 
   const GetAllData = useCallback(async () => {
-    setLoading(true);
+    if (!hasLoadedOnceRef.current) {
+      setLoading(true);
+    }
     try {
       await Promise.allSettled([
         GetBalanceData(),
@@ -178,6 +191,8 @@ const Dashboard = () => {
       console.error("Unexpected error:", error);
     } finally {
       setLoading(false);
+      hasLoadedOnceRef.current = true;
+      setHasLoadedOnce(true);
     }
   }, [
     GetBalanceData,
@@ -320,7 +335,7 @@ const Dashboard = () => {
       </div>
 
       <div>
-        {loading && (
+        {loading && !hasLoadedOnce && (
           <div className="fixed inset-0 z-[3000] flex h-full w-full items-center justify-center backdrop-blur-[4px] backdrop-filter">
             <CgSpinner className="mx-auto mt-20 size-14 animate-spin text-white" />
           </div>

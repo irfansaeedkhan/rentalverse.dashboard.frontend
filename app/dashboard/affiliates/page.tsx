@@ -31,7 +31,7 @@ const Affiliates = () => {
   }, []);
 
   const getAffiliatesDetails = useCallback(async () => {
-    setIsLoading("pending");
+    setIsLoading((prev) => (prev === "resolved" ? "resolved" : "pending"));
     try {
       const res = await getAffiliates(selectedFilter);
       setAffiliatesList(res);

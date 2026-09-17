@@ -1,21 +1,18 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import { getProfile } from "@/lib/auth/get-profile";
-import { getProfileDataApiResponseType } from "../profile/profile-card-data";
+import { useAuthStore } from "@/stores/auth.store";
 
 export const HeaderTitleSmallScreen = () => {
-  const [profileData, setProfileData] =
-    useState<getProfileDataApiResponseType>();
   const pathname = usePathname();
+  const user = useAuthStore((state) => state.user);
   let path = pathname.split("/").pop();
   if (path === "") {
     path = "Dashboard";
   } else if (path?.includes("-")) {
     path = path?.split("-").join(" ");
     path = path!.charAt(0).toUpperCase() + path!.slice(1);
-    // also capitalize next word first letter
     const index = path.indexOf(" ");
     path =
       path.slice(0, index + 1) +
@@ -25,26 +22,13 @@ export const HeaderTitleSmallScreen = () => {
     path = path!.charAt(0).toUpperCase() + path!.slice(1);
   }
 
-  const getProfileData = useCallback(async () => {
-    try {
-      const res = await getProfile();
-      setProfileData(res);
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  useEffect(() => {
-    getProfileData();
-  }, [getProfileData]);
-
   return (
     <div className="flex flex-col gap-6">
       <h2 className="font-kanit text-2xl font-normal md:hidden">
-        {profileData && pathname === "/dashboard" && (
+        {user && pathname === "/dashboard" && (
           <>
             <span className="text-gradient">
-              Welcome Back, {profileData?.Name}
+              Welcome Back, {user?.Name}
             </span>{" "}
             <span className="bg-gradient">👋</span>
           </>
@@ -53,10 +37,6 @@ export const HeaderTitleSmallScreen = () => {
       <h2
         className={clsx(
           "mb-5 block font-kanit text-2xl font-black uppercase leading-8 text-white sm:mb-6 md:mb-8",
-          // (pathname === "/my-profile" ||
-          //   pathname === "/my-invoice" ||
-          //   pathname === "/terms") &&
-          //   "hidden",
         )}
       >
         {path}

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState, useCallback } from "react";
 import { DropdownOption, YearDropdown } from "../year-drop-down";
 import { TransactionChart } from "../transaction-chart";

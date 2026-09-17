@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { Logout } from "@/assets/svgs";
 import { SidebarData } from "./sidebar-data";
@@ -53,6 +53,15 @@ export const Sidebar = ({ toggle, setToggle }: any) => {
   useEffect(() => {
     getProfileData();
   }, [getProfileData]);
+
+  useEffect(() => {
+    SidebarData.forEach((item) => {
+      router.prefetch(item.link);
+    });
+    router.prefetch(AppRoutes.profile.my_profile);
+    router.prefetch(AppRoutes.profile.my_invoice);
+    router.prefetch(AppRoutes.settings.profile_settings);
+  }, [router]);
 
   return (
     <div className="overflow-x-hidden lg:overflow-visible">
@@ -120,6 +129,7 @@ export const Sidebar = ({ toggle, setToggle }: any) => {
                 <Link
                   href={item.link}
                   key={item.link}
+                  prefetch
                   className={clsx(
                     "group flex items-center justify-center gap-3 lg:justify-start",
                   )}
