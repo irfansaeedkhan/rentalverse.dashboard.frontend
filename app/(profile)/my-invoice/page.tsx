@@ -11,7 +11,7 @@ const MyInvoice = () => {
         <ExclaimationIcon className="size-8 shrink-0 cursor-pointer stroke-2" />
         <div className="flex flex-col gap-1">
           <h3 className="text-yellow pt-1 font-kanit text-xs md:text-sm">
-            Invoices complaint with BIA and FSA regulators
+            Invoices compliant with BIA and FSA regulators
           </h3>
         </div>
       </div>

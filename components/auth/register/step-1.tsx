@@ -104,19 +104,22 @@ export const Step1: React.FC<any> = ({ formMethods }) => {
         <input
           autoComplete="off"
           className={clsx(inputField)}
-          placeholder="Referral Code"
+          placeholder="Referral Code (optional)"
           type="text"
-          required
           readOnly={!isReferralEditable}
           id="referral_code"
           {...register("referral_code", {
-            required: "Referral code is required",
             maxLength: {
               value: 50,
               message: "Referral code cannot exceed 50 characters",
             },
           })}
         />
+        <p className="mt-1 text-xs text-white/60">
+          Optional. If someone invited you, enter their code here, or open
+          this page from their referral link and it fills in automatically.
+          Leave it blank to continue without one.
+        </p>
         {errors.referral_code && (
           <p className="mt-1 text-xs text-red-shade-4">
             {errors.referral_code.message}
@@ -136,7 +139,7 @@ export const Step1: React.FC<any> = ({ formMethods }) => {
             htmlFor="checkbox"
             className="block min-h-5 text-xs font-normal text-white sm:h-3 md:text-sm"
           >
-            By proceeding, you agree to Altaria&apos;s{" "}
+            By proceeding, you agree to RentalVerse&apos;s{" "}
             <Link
               href={AppRoutes.privacy_policy}
               className="cool-link cursor-pointer font-semibold"

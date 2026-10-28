@@ -23,7 +23,7 @@ export const TransactionChartMobile: React.FC<Props> = ({ graphData }) => {
   const updateChartData = useCallback(() => {
     setSeriesData([
       {
-        name: "Revenue",
+        name: "Monthly return",
         data: graphData.map((data) => Object.values(data)[0] || 0),
       },
     ]);
@@ -52,20 +52,7 @@ export const TransactionChartMobile: React.FC<Props> = ({ graphData }) => {
       },
 
       xaxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
+        categories: graphData.map((data) => Object.keys(data)[0].slice(0, 3)),
         position: "top",
         min: 0,
         max: 7,
@@ -127,7 +114,7 @@ export const TransactionChartMobile: React.FC<Props> = ({ graphData }) => {
 
           return `
             <div style="background-color: #0a2540; border: 1px solid #00C1D4; padding: 8px; border-radius: 8px; min-width: 100px;">
-              <p style="color: white; font-weight: bold; margin: 0;">Revenue</p>
+              <p style="color: white; font-weight: bold; margin: 0;">Monthly return</p>
               <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 8px;">
               <p style="color: #00FF94; margin: 0; padding-right: 8px;">${month}</p>
               <p style="color: #00FF94; margin: 0; padding-left: 8px;">${value}%</p>

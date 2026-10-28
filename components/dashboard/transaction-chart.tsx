@@ -25,7 +25,7 @@ export const TransactionChart: React.FC<Props> = ({ graphData }) => {
     const dataPoints = graphData.map((data) => Object.values(data)[0]);
     setSeries([
       {
-        name: "Revenue",
+        name: "Monthly return",
         data: dataPoints,
       },
     ]);
@@ -50,20 +50,7 @@ export const TransactionChart: React.FC<Props> = ({ graphData }) => {
         enabled: false,
       },
       xaxis: {
-        categories: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December",
-        ],
+        categories: graphData.map((data) => Object.keys(data)[0]),
         labels: {
           style: {
             colors: "#ffffff",
@@ -122,7 +109,7 @@ export const TransactionChart: React.FC<Props> = ({ graphData }) => {
 
           return `
             <div style="background-color: #0a2540; border: 1px solid #00C1D4; padding: 8px; border-radius: 8px; min-width: 100px;">
-              <p style="color: white; font-weight: bold; margin: 0;">Revenue</p>
+              <p style="color: white; font-weight: bold; margin: 0;">Monthly return</p>
               <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 8px;">
               <p style="color: #00FF94; margin: 0; padding-right: 8px;">${month}</p>
               <p style="color: #00FF94; margin: 0; padding-left: 8px;">${value}%</p>

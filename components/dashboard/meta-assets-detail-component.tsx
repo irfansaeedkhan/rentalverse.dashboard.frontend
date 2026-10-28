@@ -135,7 +135,7 @@ const MetaAssetsDetailComponent: React.FC<Props> = ({
 
             <div className="flex flex-col gap-1">
               <p className="text-xxs text-white">Rewards Received</p>
-              <p className="text-sm text-green ">{received_rewards} / 78</p>
+              <p className="text-sm text-green ">{received_rewards} payments</p>
             </div>
             <div className="flex flex-col gap-1">
               <p className="text-xxs text-white">USDT Earned Until Now</p>

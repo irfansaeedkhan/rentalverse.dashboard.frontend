@@ -106,18 +106,29 @@ export const LeaderboardTableMobile: React.FC<Props> = ({
               </div>
             </div>
           ))}
-          <div className="mx-auto flex w-full max-w-[15rem] items-center justify-center gap-4 py-4">
+          <div className="mx-auto flex w-full max-w-[20rem] items-center justify-center gap-4 py-4">
             <button
               onClick={handlePrevPage}
               disabled={page === 1}
-              className="flex w-full items-center justify-center gap-2 rounded-lg border-[1px]  border-[#1414141F] bg-primary-light px-4 py-2 text-sm text-white disabled:opacity-50"
+              aria-disabled={page === 1}
+              className="flex w-full items-center justify-center gap-2 rounded-lg border-[1px]  border-[#1414141F] bg-primary-light px-4 py-2 text-sm text-white disabled:cursor-not-allowed disabled:opacity-40"
             >
               <HiMiniArrowLeft /> Previous
             </button>
+            <span className="shrink-0 text-xs text-white/60">
+              Page {page} of {leaderboardList?.Number_of_Pages ?? 1}
+            </span>
             <button
               onClick={handleNextPage}
-              disabled={page === leaderboardList?.Number_of_Pages}
-              className="flex w-full items-center justify-center gap-2 rounded-lg border-[1px]  border-[#1414141F] bg-primary-light px-4 py-2 text-sm text-white disabled:opacity-50"
+              disabled={
+                !leaderboardList ||
+                page >= (leaderboardList?.Number_of_Pages ?? 1)
+              }
+              aria-disabled={
+                !leaderboardList ||
+                page >= (leaderboardList?.Number_of_Pages ?? 1)
+              }
+              className="flex w-full items-center justify-center gap-2 rounded-lg border-[1px]  border-[#1414141F] bg-primary-light px-4 py-2 text-sm text-white disabled:cursor-not-allowed disabled:opacity-40"
             >
               Next <HiMiniArrowRight />
             </button>

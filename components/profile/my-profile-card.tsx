@@ -5,7 +5,6 @@ import { sliceAccountAddress } from "@/utils/slice-account-address";
 import { APPBaseURL } from "@/constants/base-urls";
 import { copyText } from "@/utils/copy-text";
 import toast from "react-hot-toast";
-import { sliceReferalAddress } from "@/utils/slice-referal-address";
 
 interface Props extends getProfileDataApiResponseType {
   card_title: string;
@@ -38,9 +37,9 @@ export const MyProfileCard: React.FC<Props> = ({
         return { ...data, value: Country };
       case "Phone Number":
         return { ...data, value: Phone };
-      case "Deposit Address":
+      case "Deposit Address (BNB Smart Chain)":
         return { ...data, value: WalletAddress };
-      case "Referrals Address":
+      case "Referral Link":
         return {
           ...data,
           value: `${APPBaseURL}/auth/register?ref=${AffiliateCode}`,
@@ -61,21 +60,21 @@ export const MyProfileCard: React.FC<Props> = ({
             <div className="flex size-11 flex-shrink-0 items-center justify-center rounded-full border border-gray-shade-1/10 bg-transparent">
               <data.icon />
             </div>
-            <div className="flex w-full flex-col gap-1">
+            <div className="flex w-full min-w-0 flex-col gap-1">
               <h3 className="text-xs font-medium tracking-[-0.28px] opacity-60">
                 {data.title}
               </h3>
               <div className="flex w-full flex-wrap items-center justify-between gap-5">
                 <p
-                  className="cursor-pointer overflow-hidden text-xs font-semibold text-white transition-colors duration-100 ease-in-out hover:text-[#1490ea] hover:underline lg:text-sm"
+                  className="cursor-pointer overflow-hidden break-all text-xs font-semibold text-white transition-colors duration-100 ease-in-out hover:text-[#1490ea] hover:underline lg:text-sm"
                   onClick={() => {
                     copyText(data.value);
                     toast.success("Copied to clipboard");
                   }}
                 >
                   {data.button
-                    ? data.title === "Referrals Address"
-                      ? sliceReferalAddress(data.value)
+                    ? data.title === "Referral Link"
+                      ? data.value
                       : sliceAccountAddress(data.value)
                     : data.value}
                 </p>

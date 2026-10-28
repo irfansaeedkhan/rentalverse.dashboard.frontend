@@ -41,9 +41,16 @@ export const CreateMetaAssetsDashboard: React.FC<Props> = ({
     setValue(value);
   };
 
-  // todays day
+  // A purchase joins the already-open position, so its start date is the
+  // position start date, not today. A first purchase starts today.
   const today = new Date();
-  const StartDate = dayjs(today).format("DD MMM, YYYY");
+  const positionStartDate = metaAssetsDetails?.contract_start_date
+    ? dayjs(metaAssetsDetails.contract_start_date).format("DD MMM, YYYY")
+    : null;
+  const StartDate =
+    metaAssetsDetails?.owned_offices && positionStartDate
+      ? positionStartDate
+      : dayjs(today).format("DD MMM, YYYY");
 
   function handleBuyMetaWithBalanceClick() {
     if (

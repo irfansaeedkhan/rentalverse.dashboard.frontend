@@ -40,13 +40,13 @@ export const cardData: cardDataType[] = [
     card_title: "Deposit and Referrals",
     card_data: [
       {
-        title: "Deposit Address",
+        title: "Deposit Address (BNB Smart Chain)",
         value: "N/A",
         icon: WalletIcon,
         button: "Copy",
       },
       {
-        title: "Referrals Address",
+        title: "Referral Link",
         value: "N/A",
         icon: ReferralAddressIcon,
         button: "Copy",

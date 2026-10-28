@@ -3,7 +3,6 @@ import { ProfileCopyButton } from "./profile-copy-button";
 import { APPBaseURL } from "@/constants/base-urls";
 import { copyText } from "@/utils/copy-text";
 import toast from "react-hot-toast";
-import { sliceReferalAddress } from "@/utils/slice-referal-address";
 import { sliceAccountAddress } from "@/utils/slice-account-address";
 
 export const ReferralAddressCard: React.FC<any> = ({
@@ -13,7 +12,7 @@ export const ReferralAddressCard: React.FC<any> = ({
   return (
     <div className="bg-primary-dark w-full rounded-xl p-6 text-white">
       <h2 className="text-lg tracking-[-0.28px] text-white md:text-xl">
-        Referrals Address
+        Referral Link
       </h2>
       <div className="flex w-full flex-col gap-4 pt-4">
         <div className="flex items-center gap-5">
@@ -55,9 +54,7 @@ export const ReferralAddressCard: React.FC<any> = ({
                 }}
                 type="text"
                 // value={`${APPBaseURL}/auth/register?ref=${AffiliateCode}`}
-                value={sliceReferalAddress(
-                  `${APPBaseURL}/auth/register?ref=${AffiliateCode}`,
-                )}
+                value={`${APPBaseURL}/auth/register?ref=${AffiliateCode}`}
               />
               <ProfileCopyButton
                 value={`${APPBaseURL}/auth/register?ref=${AffiliateCode}`}

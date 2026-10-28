@@ -23,7 +23,7 @@ export const RewardsCard: React.FC<Props> = ({ refferalRewards }: Props) => {
       <hr className="w-full border border-primary-light md:hidden" />
       <div className="flex flex-1 flex-col gap-[14px] md:px-6">
         <div className={mainWrap}>
-          <h3 className={firstChild}>Elegible For Referral Rewards</h3>
+          <h3 className={firstChild}>Eligible For Referral Rewards</h3>
           <h3 className={secondChild}>
             <InfoIconWithTooltip text="Referral Rewards will be paid to you only if you have purchased at least one Meta Asset." />
             {refferalRewards?.is_eligable_for_reward ? "Yes" : "No"}

@@ -19,7 +19,7 @@ const Register = () => {
             Create Account
           </h2>
           <span className="font-nexa text-sm font-normal text-white">
-            Sign up to Altaria
+            Sign up to RentalVerse
           </span>
         </div>
         <div className="mx-auto w-full max-w-[566px] px-6">

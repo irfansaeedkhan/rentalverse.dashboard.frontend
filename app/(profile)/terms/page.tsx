@@ -28,8 +28,7 @@ const MyInvoice = () => {
           <br />
           This document establishes the terms and conditions between Altaria FZC
           (&quot;the Company&quot;) and the user (&quot;the Buyer&quot;) for the
-          purchase, development, and management of Meta Assets in the Altaria
-          Order Terræ Metaverse. By using the services of Altaria FZC, the Buyer
+          purchase, development, and management of Meta Assets in the Altaria FZC Terræ Metaverse. By using the services of Altaria FZC, the Buyer
           agrees to these Terms and Conditions.
         </span>
         <span className={subHeadingClass}>Definitions</span>
@@ -50,7 +49,7 @@ const MyInvoice = () => {
           </li>
           <li>
             <span className={boldClass}>&quot;Management Period&quot;:</span> A
-            time frame of 78 weeks during which Altaria FZC undertakes the
+            time frame of 156 weeks during which Altaria FZC undertakes the
             activities of developing, renting, and selling Meta Assets, aiming
             to market the digital offices and optimize methods according to
             strategy and results achieved.
@@ -65,7 +64,7 @@ const MyInvoice = () => {
           <span className={subHeadingClass}>Purchase of Meta Assets</span>
           <br />
           Altaria FZC offers Buyers the opportunity to acquire Office Meta
-          Assets, representing virtual spaces in the Altaria Terræ Metaverse.
+          Assets, representing virtual spaces in the Altaria FZC Terræ Metaverse.
           This purchase is intended as a contribution to the development fund
           used for the creation and rental of virtual spaces, with the vision of
           transforming them into dynamic and increasingly populated spaces
@@ -115,12 +114,12 @@ const MyInvoice = () => {
             Detailed Description of the Operating Model
           </span>
           <br />
-          Altaria FZC is committed to exploring and developing the Altaria Terræ
+          Altaria FZC is committed to exploring and developing the Altaria FZC Terræ
           Metaverse, focusing on acquiring and valuing virtual offices. These
           spaces, initially valued at an Initial Minimum Quotation (IMQ) of
           $1,000 each, represent unique opportunities for the Buyer to
           participate in the evolution of the Metaverse. Through a meticulous
-          cycle of 78 weeks and multiples, Altaria FZC will enhance the value
+          cycle of 156 weeks and multiples, Altaria FZC will enhance the value
           and attractiveness of these spaces, fully managing advertising, client
           procurement, buying and selling of Virtual Offices, renting spaces,
           and collecting royalties. This process is undertaken with the aim of
@@ -132,7 +131,7 @@ const MyInvoice = () => {
             Profit Generation and Distribution Process
           </span>
           <br />
-          With the purchase of Virtual Offices, the Buyer authorizes Altaria LTD
+          With the purchase of Virtual Offices, the Buyer authorizes Altaria FZC
           to use these virtual spaces for productive initiatives. It is
           important to note that any profits are the direct result of the
           innovation and work done on these lands. These will be equitably
@@ -160,7 +159,7 @@ const MyInvoice = () => {
             option to redeem their Meta Assets. In this case, they can choose,
             based on their previous purchase, which size of virtual office they
             can redeem. It should be noted that these spaces may belong to
-            different Collections within Altaria FZC Terræ, depending on
+            different Collections within Altaria FZC Terræ Metaverse, depending on
             availability and the transformations that occurred during the
             development cycle. These options are designed to ensure flexibility
             and freedom of choice for the Buyer, in line with the dynamic nature
@@ -220,7 +219,7 @@ const MyInvoice = () => {
             The activities conducted by Altaria FZC and the transactions related
             to the Meta Assets do not constitute a public offering of savings,
             an investment solicitation, or financial intermediation operations.
-            The Purchasers&apos; participation in Altaria LTD&apos;s activities
+            The Purchasers&apos; participation in Altaria FZC&apos;s activities
             is intended as a contribution to the enhancement of digital assets
             within the Altaria FZC Terræ Metaverse, without any financial or
             speculative implications.
@@ -247,7 +246,7 @@ const MyInvoice = () => {
         </ul>
       </p>
       <h2 className="pb-5 pt-12 text-xl font-semibold leading-5 text-white">
-        Purchase and Management of Meta Assets
+        Legal Compliance
       </h2>
       <p className={pClass}>
         <span>

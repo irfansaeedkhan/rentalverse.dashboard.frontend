@@ -169,8 +169,8 @@ export const WithdrawalModal: React.FC<Props> = ({
         isOpen={open}
         onClose={onClose}
         modalContentClassName="h-auto rounded-xl sm:max-w-[560px] max-w-[343px]"
-        shouldCloseOnOverlayClick={false}
-        shouldCloseOnEsc={false}
+        shouldCloseOnOverlayClick={true}
+        shouldCloseOnEsc={true}
       >
         <div className="flex w-full flex-col items-center text-center">
           <LuAlertCircle className="mx-auto size-8 cursor-pointer stroke-orange stroke-2" />
@@ -198,8 +198,8 @@ export const WithdrawalModal: React.FC<Props> = ({
       isOpen={open}
       onClose={onClose}
       modalContentClassName="h-auto rounded-xl sm:max-w-[566px] max-w-[343px]"
-      shouldCloseOnOverlayClick={false}
-      shouldCloseOnEsc={false}
+      shouldCloseOnOverlayClick={true}
+      shouldCloseOnEsc={true}
     >
       <div className="flex w-full flex-col gap-6">
         {!success && !failure && (
@@ -246,6 +246,10 @@ export const WithdrawalModal: React.FC<Props> = ({
               <label htmlFor="account_address" className="text-xs text-white">
                 Address
               </label>
+              <p className="text-xxs text-white/60">
+                Enter a BNB Smart Chain (0x) address. Sending to another
+                network may lose your funds.
+              </p>
               <input
                 type="text"
                 name="account_address"

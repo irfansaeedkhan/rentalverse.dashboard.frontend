@@ -77,7 +77,7 @@ export const EditProfileModel: React.FC<Props> = ({ open, onClose }) => {
             />
             <span className="flex flex-col">
               <span className="text-xs sm:text-sm">Personal Information</span>
-              <span className="text-xxs">Set your identity informations</span>
+              <span className="text-xxs">Set your identity information</span>
             </span>
           </button>
           <button
@@ -98,10 +98,13 @@ export const EditProfileModel: React.FC<Props> = ({ open, onClose }) => {
             />
             <span className="flex flex-col">
               <span className="text-xs sm:text-sm">Account Password</span>
-              <span className="text-xxs">
-                Last updated{" "}
-                {moment(user?.PasswordResetAt).startOf("day").fromNow()}
-              </span>
+              {user?.PasswordResetAt &&
+                moment(user.PasswordResetAt).isValid() && (
+                  <span className="text-xxs">
+                    Last updated{" "}
+                    {moment(user.PasswordResetAt).startOf("day").fromNow()}
+                  </span>
+                )}
             </span>
           </button>
         </div>

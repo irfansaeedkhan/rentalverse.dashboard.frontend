@@ -184,7 +184,7 @@ export const CreateOrderModal: React.FC<Props> = ({
                 className="block text-xs font-normal text-white"
               >
                 By proceeding the the purchase of Meta Assets, you agree to
-                Altaria&apos;s{" "}
+                RentalVerse&apos;s{" "}
                 <Link
                   href={AppRoutes.profile.terms}
                   className="font-semibold underline"

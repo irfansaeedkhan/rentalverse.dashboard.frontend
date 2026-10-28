@@ -209,11 +209,11 @@ const KYC = () => {
                     electronic copies by email to admin@altaria.io.
                   </p>
                 </div>
-                {/* Identity informations  */}
+                {/* Identity information  */}
                 <div className="flex flex-col">
                   <div className="flex flex-col pb-4">
                     <h4 className="font-kanit text-base text-white">
-                      Identity informations
+                      Identity information
                     </h4>
                     <div className="flex gap-1">
                       <p className="text-sm text-white/50">
@@ -398,11 +398,11 @@ const KYC = () => {
                   </div>
                 </div>
 
-                {/* Documents informations  */}
+                {/* Documents information  */}
                 <div className="flex flex-col">
                   <div className="flex flex-col pb-4">
                     <h4 className="font-kanit text-base text-white">
-                      Documents informations
+                      Documents information
                     </h4>
                     <div className="flex gap-1">
                       <p className="text-sm text-white/50">

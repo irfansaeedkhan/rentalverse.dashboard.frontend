@@ -14,15 +14,15 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("http://localhost:3000"),
-  title: "Portfolio Dashboard Demo",
-  description: "A standalone dashboard portfolio demo.",
-  keywords: ["dashboard", "portfolio", "demo"],
-  authors: [{ name: "Portfolio Demo" }],
+  title: "RentalVerse",
+  description: "RentalVerse demo dashboard for virtual office meta assets.",
+  keywords: ["rentalverse", "dashboard", "demo"],
+  authors: [{ name: "RentalVerse" }],
   openGraph: {
-    title: "Portfolio Dashboard Demo",
-    siteName: "Portfolio Dashboard Demo",
+    title: "RentalVerse",
+    siteName: "RentalVerse",
     url: "http://localhost:3000",
-    description: "A standalone dashboard portfolio demo.",
+    description: "RentalVerse demo dashboard for virtual office meta assets.",
     images: [
       {
         url: "/images/logo.png",
@@ -61,8 +61,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   twitter: {
-    title: "Altaria",
-    description: "Altaria is worlds best and reliable Web3 Organization",
+    title: "RentalVerse",
+    description: "RentalVerse demo dashboard for virtual office meta assets.",
     images: [
       {
         url: "/images/logo.png",

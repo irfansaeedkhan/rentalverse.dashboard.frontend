@@ -42,7 +42,7 @@ export const RenderedPageEmail = () => {
         {error
           ? error
           : isLoading === "loading" || isLoading === "idle"
-            ? "Thanks for verifying at Altaria. This process may take 15-30 mins to complete."
+            ? "Thanks for verifying at RentalVerse. This process may take 15-30 mins to complete."
             : "Yahooo! You have successfully verified your email. Click the button to go to the login page."}
       </p>
       <Link href={AppRoutes.auth.login}>

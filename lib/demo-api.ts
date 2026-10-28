@@ -3,8 +3,12 @@ export const demoUser = {
   Name: "Avery",
   Surname: "Morgan",
   AffiliateCode: "ALT-DEMO",
+  // BNB Smart Chain (0x-style) wallet. Deposit addresses for other networks
+  // are returned per network by the deposit branch below, never this address
+  // relabelled as TRON, so a copied address always matches its network.
   WalletAddress: "0x381E97Fb7531BF0E1795B02fa9Db203940B78D10",
-  PasswordResetAt: "",
+  // Real date: an empty value rendered as "Invalid date" on the password tab.
+  PasswordResetAt: "2026-09-05T10:00:00Z",
   Auth_Token: "demo-access-token",
   refresh_token: "demo-refresh-token",
 };
@@ -17,14 +21,21 @@ const dashboard = {
   Contract_Expiry_Date: "2027-05-30",
   Contract_Start_Date: "2024-05-30",
   Equity_Percentage: 12.5,
-  Lands_Value: 42800,
+  // Reconciled: 42 owned offices x $1,000 pack price = $42,000. This matches
+  // the invoice total (42 packs) and the $1,000 IMQ in Terms. Minted
+  // 136 x $1,000 = $136,000 already agreed, confirming the pack price.
+  Lands_Value: 42000,
   Minted_Lands: 136,
   Number_of_Pages: 2,
   Onwhitdraw_balance: 1200,
   Page_size: DEMO_PAGE_SIZE,
   Owned_Lands: 42,
-  ROI_Last_Month: 3.8,
-  ROI_Until_Now: 18.4,
+  // Reconciled with the rewards list below: Sep 2026 rewards
+  // (1250 + 680.50) and all rewards summed (6722.00). These are USDT
+  // amounts, not percentages; the user-meta-asset branch recomputes them
+  // from the rewards rows so the two surfaces can never drift apart.
+  ROI_Last_Month: 1930.5,
+  ROI_Until_Now: 6722,
   Supply_Max: 12000,
   Wallet_Address: demoUser.WalletAddress,
   return_stats_arrays: [
@@ -80,14 +91,23 @@ const affiliateNames = [
   "Jamie Cruz",
 ];
 
+// One reconciled affiliate set. Packs sum to 17 and asset values sum to
+// $17,000 (packs x $1,000), so the affiliate report below can be computed
+// from this list instead of carrying separate, disagreeing totals. Weekly
+// commissions sum to $248; the report derives its percentage from that
+// ($248 / $17,000 = 1.46%) and last-month rewards as 4 weeks of commission
+// ($992), so no figure reuses a dashboard or withdrawal amount.
+const affiliatePacks = [3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 0, 0];
+const affiliateWeeklyCommission = [28, 26, 24, 23, 22, 21, 20, 19, 18, 17, 16, 14];
+
 const affiliates = affiliateNames.map((fullName, index) => {
   const [name, surName] = fullName.split(" ");
   return {
     name,
     surName,
     email: `member${index + 1}@altaria.local`,
-    MetaAsset_Purchased: index + 1,
-    Royalty: 84 + index * 32,
+    MetaAsset_Purchased: affiliatePacks[index],
+    Royalty: affiliateWeeklyCommission[index],
   };
 });
 
@@ -114,8 +134,11 @@ const leaderboard = Array.from({ length: 12 }, (_, index) => ({
   ImageProfileUrl: "",
 }));
 
+// Rewards in whole cents only (no 8-decimal artifacts). Total $6,722.00;
+// latest month (Sep 2026) $1,930.50. The user-meta-asset branch sums these
+// rows, so "USDT Earned Until Now" always equals the rewards list total.
 const rewards = [
-  { Amount: 1250.12345678, Date: "2026-09-10", Type: "Sale", from: "Meta asset sale" },
+  { Amount: 1250, Date: "2026-09-10", Type: "Sale", from: "Meta asset sale" },
   { Amount: 680.5, Date: "2026-09-03", Type: "Referral", from: "Referral commission" },
   { Amount: 940, Date: "2026-08-28", Type: "Sale", from: "Meta asset sale" },
   { Amount: 420.25, Date: "2026-08-21", Type: "Referral", from: "Referral commission" },
@@ -123,19 +146,22 @@ const rewards = [
   { Amount: 315.75, Date: "2026-08-07", Type: "Referral", from: "Referral commission" },
   { Amount: 890, Date: "2026-07-30", Type: "Sale", from: "Meta asset sale" },
   { Amount: 210, Date: "2026-07-22", Type: "Referral", from: "Referral commission" },
-  { Amount: 760.01, Date: "2026-07-15", Type: "Sale", from: "Meta asset sale" },
+  { Amount: 760, Date: "2026-07-15", Type: "Sale", from: "Meta asset sale" },
   { Amount: 155.5, Date: "2026-07-08", Type: "Referral", from: "Referral commission" },
 ];
 
+// Reconciled: quantities sum to the 42 owned offices, every invoice runs
+// the full 156-week position term (not 36 weeks), and Amount is always
+// Qty x $1,000, so the invoice total is $42,000 = the owned-offices value.
 const invoices = [
-  { Amount: 1000, Date: "2026-08-18", Duration: 36, Qty: 2, SinglePackCost: 1000 },
-  { Amount: 1000, Date: "2026-07-12", Duration: 36, Qty: 1, SinglePackCost: 1000 },
-  { Amount: 1000, Date: "2026-06-10", Duration: 36, Qty: 3, SinglePackCost: 1000 },
-  { Amount: 1000, Date: "2026-05-04", Duration: 36, Qty: 1, SinglePackCost: 1000 },
-  { Amount: 1000, Date: "2026-04-02", Duration: 36, Qty: 2, SinglePackCost: 1000 },
-  { Amount: 1000, Date: "2025-12-15", Duration: 36, Qty: 1, SinglePackCost: 1000 },
-  { Amount: 1000, Date: "2025-09-20", Duration: 36, Qty: 4, SinglePackCost: 1000 },
-  { Amount: 1000, Date: "2025-06-01", Duration: 36, Qty: 2, SinglePackCost: 1000 },
+  { Amount: 6000, Date: "2026-08-18", Duration: 156, Qty: 6, SinglePackCost: 1000 },
+  { Amount: 5000, Date: "2026-07-12", Duration: 156, Qty: 5, SinglePackCost: 1000 },
+  { Amount: 7000, Date: "2026-06-10", Duration: 156, Qty: 7, SinglePackCost: 1000 },
+  { Amount: 4000, Date: "2026-05-04", Duration: 156, Qty: 4, SinglePackCost: 1000 },
+  { Amount: 6000, Date: "2026-04-02", Duration: 156, Qty: 6, SinglePackCost: 1000 },
+  { Amount: 5000, Date: "2025-12-15", Duration: 156, Qty: 5, SinglePackCost: 1000 },
+  { Amount: 4000, Date: "2025-09-20", Duration: 156, Qty: 4, SinglePackCost: 1000 },
+  { Amount: 5000, Date: "2025-06-01", Duration: 156, Qty: 5, SinglePackCost: 1000 },
 ];
 
 const transactionsSeed = [
@@ -212,13 +238,19 @@ export function demoResponse(url = "", config: any = {}) {
   }
 
   if (path.includes("deposit")) {
+    // Never return the 0x wallet as a TRON address: a copied wrong-network
+    // address can lose funds. TRON gets a T-address; ETH/BSC keep the 0x
+    // wallet, which is valid on both EVM chains.
+    if (path.includes("/trx")) {
+      return { public_key: "TRV7XkP9qWm2vYc8aB3dEfGhJkMnPsQrTz" };
+    }
     return { public_key: demoUser.WalletAddress };
   }
 
   if (path.includes("affiliate-list")) {
     const mapped = affiliates.map((item, index) => ({
       ...item,
-      asset_value: 2400 + index * 850,
+      asset_value: item.MetaAsset_Purchased * 1000,
       meta_assets_owned: item.MetaAsset_Purchased,
       weekly_comission: item.Royalty,
       open_position_date: "2024-05-30",
@@ -232,14 +264,29 @@ export function demoResponse(url = "", config: any = {}) {
   }
 
   if (path.includes("affiliate-report")) {
+    // Computed from the affiliate list above: no separate totals that can
+    // disagree with the table. Packs 17, value $17,000, weekly $248.
+    const totalAssetsValue = affiliates.reduce(
+      (sum, item) => sum + item.MetaAsset_Purchased * 1000,
+      0,
+    );
+    const weeklyCommission = affiliates.reduce(
+      (sum, item) => sum + item.Royalty,
+      0,
+    );
     return {
-      referrals: 12,
+      referrals: affiliates.length,
       is_eligable_for_reward: "Yes",
-      meta_assets: 17,
-      total_assets_value: 18400,
-      reward_percentage: 4.8,
-      sales_comission: 1260,
-      last_month_rewards: 680,
+      meta_assets: affiliates.reduce(
+        (sum, item) => sum + item.MetaAsset_Purchased,
+        0,
+      ),
+      total_assets_value: totalAssetsValue,
+      reward_percentage: Math.round(
+        (weeklyCommission / totalAssetsValue) * 100 * 100,
+      ) / 100,
+      sales_comission: weeklyCommission,
+      last_month_rewards: weeklyCommission * 4,
     };
   }
 
@@ -341,6 +388,21 @@ export function demoResponse(url = "", config: any = {}) {
   }
 
   if (path.includes("user-meta-asset")) {
+    // Earned totals are summed from the rewards list, never typed twice:
+    // until-now = all rewards ($6,722.00), last month = the latest month
+    // present in the list (Sep 2026, $1,930.50). received_rewards is the
+    // count of reward payments, not a reused money figure.
+    const earnedUntilNow = rewards.reduce(
+      (sum, item) => sum + item.Amount,
+      0,
+    );
+    const latestMonth = rewards.reduce(
+      (latest, item) => (item.Date.slice(0, 7) > latest ? item.Date.slice(0, 7) : latest),
+      "",
+    );
+    const earnedLastMonth = rewards
+      .filter((item) => item.Date.startsWith(latestMonth))
+      .reduce((sum, item) => sum + item.Amount, 0);
     return {
       id: "demo-position",
       createdAt: "2024-05-30",
@@ -349,15 +411,15 @@ export function demoResponse(url = "", config: any = {}) {
       referrer_roi: 1.2,
       contract_start_date: dashboard.Contract_Start_Date,
       contract_expiry_date: dashboard.Contract_Expiry_Date,
-      last_reward_date: "2026-08-28",
+      last_reward_date: "2026-09-10",
       owned_offices: dashboard.Owned_Lands,
-      usdt_earned_untill_now: dashboard.ROI_Until_Now,
-      usdt_earned_last_month: dashboard.ROI_Last_Month,
+      usdt_earned_untill_now: earnedUntilNow,
+      usdt_earned_last_month: earnedLastMonth,
       minted_offices_in_usd: dashboard.Company_Lands_Value,
       minted_offices: dashboard.Minted_Lands,
       owned_offices_in_usd: dashboard.Lands_Value,
       equity_percentage: dashboard.Equity_Percentage,
-      received_rewards: 1260,
+      received_rewards: rewards.length,
     };
   }
 

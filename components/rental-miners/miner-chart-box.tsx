@@ -107,9 +107,9 @@ const MinerChartBox: React.FC<Props> = ({
               value={data?.[0]?.val["Z-mAh"] || 0}
               maxValue={750}
               minValue={0}
-              label="mW/h"
+              label="mWh"
               color="#00FF94"
-              mainTitle="Green FootPrint - mW/h"
+              mainTitle="Green Footprint - mWh"
               timeIndicator="60s"
               greenFootPrint={true}
             />
@@ -129,23 +129,15 @@ const MinerChartBox: React.FC<Props> = ({
               data?.[0]?.val["M-dayTransNumber"] || 0,
             )}
             totalSales={new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
               minimumFractionDigits: 0,
             }).format(data?.[0]?.val["P-totalSale"] || 0)}
             todaySales={new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
               minimumFractionDigits: 0,
             }).format(data?.[0]?.val["R-daySale"] || 0)}
             totalRevenues={new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
               minimumFractionDigits: 0,
             }).format(data?.[0]?.val["Q-revIncome"] || 0)}
             todayRevenues={new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
               minimumFractionDigits: 0,
             }).format(data?.[0]?.val["S-dayRevIncome"] || 0)}
             refreshRate={refreshRate}

@@ -21,6 +21,7 @@ export const LoginForm = () => {
   const {
     register,
     watch,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
@@ -139,6 +140,36 @@ export const LoginForm = () => {
           />
         </div>
       </form>
+      <div className="mt-6 rounded-xl border border-gray-shade-1/10 bg-primary-dark p-4 text-white">
+        <p className="text-sm font-semibold">Demo account</p>
+        <p className="mt-1 text-xs text-white/70">
+          Explore the demo dashboard with the public demo account below. This
+          demo build signs in with any password; no real funds are involved.
+        </p>
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          <span className="rounded-md bg-primary px-3 py-2 text-xs font-medium">
+            demo@altaria.com
+          </span>
+          <button
+            type="button"
+            onClick={() => {
+              setValue("email", "demo@altaria.com", {
+                shouldValidate: true,
+              });
+            }}
+            className="rounded-md border border-gray-shade-1/10 px-3 py-2 text-xs font-medium hover:text-green"
+          >
+            Fill demo email
+          </button>
+          <button
+            type="button"
+            onClick={copyDemoEmail}
+            className="rounded-md border border-gray-shade-1/10 px-3 py-2 text-xs font-medium hover:text-green"
+          >
+            Copy email
+          </button>
+        </div>
+      </div>
       <VerifyAccountPopup
         email={watch("email")}
         open={verifyAccount}
@@ -146,6 +177,15 @@ export const LoginForm = () => {
       />
     </div>
   );
+};
+
+const copyDemoEmail = async () => {
+  try {
+    await navigator.clipboard.writeText("demo@altaria.com");
+    toast.success("Demo email copied");
+  } catch {
+    toast.error("Could not copy demo email");
+  }
 };
 
 const inputMain = "flex flex-col";
