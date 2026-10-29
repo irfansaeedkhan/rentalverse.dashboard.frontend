@@ -13,6 +13,10 @@ interface Props {
   open: boolean;
   onClose: () => void;
   rewardListData: GetRewardListItemResponse | null | undefined;
+  // Full reward count across all pages. The table only receives the current
+  // page slice, so the badge must use this, not rewardListData.length
+  // (which is just the page size, e.g. 5 of 10 total).
+  rewardListTotalCount?: number;
   handleNextPage: () => void;
   handlePrevPage: () => void;
   page: number;
@@ -23,6 +27,7 @@ export const RewardListlModal: React.FC<Props> = ({
   open,
   onClose,
   rewardListData,
+  rewardListTotalCount,
   handleNextPage,
   handlePrevPage,
   page,
@@ -36,7 +41,7 @@ export const RewardListlModal: React.FC<Props> = ({
         onClose={onClose}
         modalContentClassName="h-auto rounded-xl sm:max-w-[560px] max-w-[343px]"
         shouldCloseOnOverlayClick={false}
-        shouldCloseOnEsc={false}
+        shouldCloseOnEsc={true}
       >
         <div className="flex w-full flex-col items-center text-center">
           <ExclaimationIcon className="mx-auto size-8 shrink-0 cursor-pointer" />
@@ -65,7 +70,7 @@ export const RewardListlModal: React.FC<Props> = ({
       onClose={onClose}
       modalContentClassName="max-h-[90dvh] overflow-hidden rounded-xl sm:max-w-[800px] max-w-[343px] pb-1 md:pb-20"
       shouldCloseOnOverlayClick={false}
-      shouldCloseOnEsc={false}
+      shouldCloseOnEsc={true}
     >
       <div className="flex max-h-[80dvh] w-full max-w-[343px] flex-col gap-8  sm:max-w-[800px]">
         <div className="flex items-center justify-between gap-5">
@@ -76,7 +81,7 @@ export const RewardListlModal: React.FC<Props> = ({
             {rewardListData && (
               <TotalNumberField
                 bgColor="bg-primary-light"
-                length={rewardListData.length}
+                length={rewardListTotalCount ?? rewardListData.length}
               />
             )}
           </div>

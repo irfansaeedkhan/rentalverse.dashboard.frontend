@@ -148,12 +148,12 @@ export const LoginForm = () => {
         </p>
         <div className="mt-3 flex flex-wrap items-center gap-2">
           <span className="rounded-md bg-primary px-3 py-2 text-xs font-medium">
-            demo@altaria.com
+            test@test.com
           </span>
           <button
             type="button"
             onClick={() => {
-              setValue("email", "demo@altaria.com", {
+              setValue("email", "test@test.com", {
                 shouldValidate: true,
               });
             }}
@@ -181,7 +181,7 @@ export const LoginForm = () => {
 
 const copyDemoEmail = async () => {
   try {
-    await navigator.clipboard.writeText("demo@altaria.com");
+    await navigator.clipboard.writeText("test@test.com");
     toast.success("Demo email copied");
   } catch {
     toast.error("Could not copy demo email");

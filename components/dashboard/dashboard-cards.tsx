@@ -14,6 +14,7 @@ import { NotEnoughBalanceModel } from "./not-enough-balance-modal";
 
 interface Props {
   rewardListData: GetRewardListItemResponse | null | undefined;
+  rewardListTotalCount?: number;
   handleRewardLlistNextPage: () => void;
   handleRewardlistPrevPage: () => void;
   // handleNetworkSelect: (selectedNetwork: NetworkOption) => void;
@@ -27,6 +28,7 @@ interface Props {
 
 const DashboardCards: React.FC<Props> = ({
   rewardListData,
+  rewardListTotalCount,
   handleRewardLlistNextPage,
   handleRewardlistPrevPage,
   rewardListpage,
@@ -82,6 +84,7 @@ const DashboardCards: React.FC<Props> = ({
       <RewardListlModal
         open={onOpenRewardListModal}
         rewardListData={rewardListData}
+        rewardListTotalCount={rewardListTotalCount}
         onClose={() => setOnOpenRewardListModal(false)}
         handlePrevPage={handleRewardlistPrevPage}
         handleNextPage={handleRewardLlistNextPage}

@@ -1,5 +1,9 @@
 export const demoUser = {
-  Email: "demo@altaria.com",
+  // Public demo account shown in the login demo box and, after sign-in, on
+  // the profile. The demo build accepts any sign-in, so this must match
+  // the account the recording actually signs in with (test@test.com),
+  // not a different address, or the box and the session disagree.
+  Email: "test@test.com",
   Name: "Avery",
   Surname: "Morgan",
   AffiliateCode: "ALT-DEMO",
@@ -94,11 +98,15 @@ const affiliateNames = [
 // One reconciled affiliate set. Packs sum to 17 and asset values sum to
 // $17,000 (packs x $1,000), so the affiliate report below can be computed
 // from this list instead of carrying separate, disagreeing totals. Weekly
-// commissions sum to $248; the report derives its percentage from that
-// ($248 / $17,000 = 1.46%) and last-month rewards as 4 weeks of commission
-// ($992), so no figure reuses a dashboard or withdrawal amount.
+// commissions sum to $218; the report derives its percentage from that
+// ($218 / $17,000 = 1.28%) and last-month rewards as 4 weeks of commission
+// ($872), so no figure reuses a dashboard or withdrawal amount.
+// Commission is earned on an affiliate's holdings, so the two registered
+// referrals who hold 0 packs (Morgan Lee, Jamie Cruz) earn $0 commission:
+// a $16/$14 commission on $0 of holdings was the inconsistency flagged on
+// re-check, and zeroing it (not inventing packs) is the reconciliation.
 const affiliatePacks = [3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 0, 0];
-const affiliateWeeklyCommission = [28, 26, 24, 23, 22, 21, 20, 19, 18, 17, 16, 14];
+const affiliateWeeklyCommission = [28, 26, 24, 23, 22, 21, 20, 19, 18, 17, 0, 0];
 
 const affiliates = affiliateNames.map((fullName, index) => {
   const [name, surName] = fullName.split(" ");
@@ -190,10 +198,29 @@ const stripeHistory = [
   { amount: 1000, currency: "USD", brand: "discover", last4: "1117", timestamp: 1738843200 },
 ];
 
+function requestBody(config: any = {}) {
+  const data = config?.data;
+  if (data && typeof data === "object") return data;
+  // Axios serializes POST bodies to a JSON string before a custom adapter
+  // runs, so config.data is a string here, not the object the caller
+  // posted. Reading .Page off the string silently yields undefined, which
+  // used to pin every paginated POST (leaderboard) to page 1 while the
+  // page label still advanced. Parse it so the requested page is honored.
+  if (typeof data === "string") {
+    try {
+      return JSON.parse(data);
+    } catch {
+      return {};
+    }
+  }
+  return {};
+}
+
 function getPage(config: any = {}) {
-  const offset = Number(config?.params?.offset ?? 0);
+  const body = requestBody(config);
+  const offset = Number(config?.params?.offset ?? body?.offset ?? 0);
   const fromOffset = Number.isFinite(offset) && offset > 0 ? Math.floor(offset / DEMO_PAGE_SIZE) + 1 : 1;
-  const raw = Number(config?.params?.Page ?? config?.data?.Page ?? fromOffset);
+  const raw = Number(config?.params?.Page ?? body?.Page ?? fromOffset);
   return Number.isFinite(raw) && raw > 0 ? raw : 1;
 }
 
@@ -265,7 +292,7 @@ export function demoResponse(url = "", config: any = {}) {
 
   if (path.includes("affiliate-report")) {
     // Computed from the affiliate list above: no separate totals that can
-    // disagree with the table. Packs 17, value $17,000, weekly $248.
+    // disagree with the table. Packs 17, value $17,000, weekly $218.
     const totalAssetsValue = affiliates.reduce(
       (sum, item) => sum + item.MetaAsset_Purchased * 1000,
       0,
@@ -455,13 +482,15 @@ export function demoResponse(url = "", config: any = {}) {
   }
 
   if (path.includes("withdraw")) {
+    // Same stringified-body note as requestBody: read the parsed body.
+    const body = requestBody(config);
     return {
       success: true,
       message: "Withdrawal submitted (demo)",
       data: {
-        amount: config?.data?.amount ?? 0,
-        address: config?.data?.address ?? "",
-        network: config?.data?.Network ?? "BSC",
+        amount: body?.amount ?? 0,
+        address: body?.address ?? "",
+        network: body?.Network ?? "BSC",
       },
     };
   }

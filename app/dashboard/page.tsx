@@ -246,6 +246,7 @@ const Dashboard = () => {
           metaAssetsDetails={metaAssetsDetails}
           buyMetaAssetDetail={buyMetaAssetDetail}
           rewardListData={pagedRewardList}
+          rewardListTotalCount={rewardList?.length}
           handleRewardLlistNextPage={handleRewardLlistNextPage}
           handleRewardlistPrevPage={handleRewardlistPrevPage}
           rewardListpage={rewardListpage}

@@ -518,7 +518,7 @@ const MyInvoice = () => {
           </span>
           <br />
           The Buyer has the right to withdraw from the agreement with Altaria
-          LTD at any time. To exercise this right, the Buyer must send a written
+          FZC at any time. To exercise this right, the Buyer must send a written
           notice via postal correspondence to Altaria FZC, clearly expressing
           the decision to terminate the agreement. It is emphasized that, in the
           event of withdrawal, the Buyer will not be entitled to a refund of the
@@ -556,7 +556,7 @@ const MyInvoice = () => {
             Changes in Meta Assets Portfolio
           </span>
           <br />
-          he Buyer understands that, following withdrawal and the subsequent
+          The Buyer understands that, following withdrawal and the subsequent
           redemption process, they may receive Virtual Offices different from
           those originally purchased, in terms of location, characteristics, or
           collection within the Altaria FZC Terræ Metaverse. This is due to the
@@ -795,18 +795,6 @@ const MyInvoice = () => {
           These Terms and Conditions have been drafted in English. If they are
           translated into any other language, the English version will prevail
           in case of conflict.
-        </span>
-        <span>
-          <span className={subHeadingClass}>
-            Interpretability and Severability
-          </span>
-          <br />
-          If any provision of these Terms and Conditions is found to be invalid,
-          illegal, or unenforceable by a court or other competent authority,
-          that provision will be modified to the minimum extent necessary to
-          make it valid, legal, and enforceable, maintaining the original
-          objectives intact. The remaining provisions of the Terms and
-          Conditions will remain fully valid and effective.
         </span>
         <span>
           <span className={subHeadingClass}>Final Provisions</span>
